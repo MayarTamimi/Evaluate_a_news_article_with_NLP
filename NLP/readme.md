@@ -8,7 +8,7 @@
 - SASS
 - Node js
 - Webpack
-- TextAlign API
+- Aylien API
 - Jest
 
 ## Run project
