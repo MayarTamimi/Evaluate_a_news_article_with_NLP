@@ -1,0 +1,31 @@
+header {
+    padding: 60px;
+    text-align: center;
+    background-color: rgb(190, 86, 190);
+    color: rgb(27, 13, 233);
+    font-size: 30px;
+}
+
+/* Phone */
+@media only screen and (max-width: 715px) {
+    header {
+        padding: 30px;
+        font-size: 20px;
+    }
+}
+
+/* Tablet */
+@media only screen and (max-width: 990px) {
+    header {
+        padding: 45px;
+        font-size: 25px;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 901px) {
+    header {
+        padding: 60px;
+        font-size: 30px;
+    }
+}

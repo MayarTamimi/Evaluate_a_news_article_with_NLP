@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluate a News Article with Aylien NLP</title>
+</head>
+<body>
+    <header>
+        <div class="branding">
+            <h1>Udacity</h1>
+        </div>
+        <div class="project-title">
+            <h2>Project: Evaluate a News Article with NLP</h2>
+        </div>
+    </header>
+    <main>
+        <section class="about">
+            <h1>About Aylien Text Analysis API</h1>
+            <p>
+                The Aylien Text Analysis API provides powerful and flexible AI-driven content analysis solutions that bring the power of NLP to the masses. We help developers, data scientists, and marketers understand human-generated textual content at scale.
+            </p>
+        </section>
+
+        <section class="try-it-out">
+            <h2>Try it out! Type in a "URL" to see what the Aylien NLP understands from it.</h2>
+            <form id="url-form" onsubmit="return Client.handleSubmit(event)">
+                <input id="name" type="url" name="test-url" placeholder="https://www.news-source/a-news-article...">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="errors" id="error-section">
+            <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
+            <div id="error"></div>
+        </section>
+
+        <section class="url-results">
+            <ul>
+                <li>
+                    <h3>Text Polarity:</h3>
+                    <p id="polarity"></p>
+                    <h4>Confidence:</h4>
+                    <p id="polarity_confidence"></p>
+                </li>
+                <li>
+                    <h3>Text Subjectivity:</h3>
+                    <p id="subjectivity"></p>
+                    <h4>Confidence:</h4>
+                    <p id="subjectivity_confidence"></p>
+                </li>
+            </ul>
+            <h3>Text Excerpt:</h3>
+            <p id="excerpt"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Aylien Natural Language Processing</p>
+    </footer>
+
+    <script>
+    const Client = {
+        handleSubmit: async (event) => {
+            event.preventDefault();
+
+            const url = document.getElementById('name').value;
+            if (!url) {
+                document.getElementById('error').textContent = "Please enter a valid URL.";
+                document.getElementById('error-section').style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('https://api.aylien.com/v1/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-AYLIEN-TextAPI-Application-Key': 'YOUR_API_KEY',
+                        'X-AYLIEN-TextAPI-Application-ID': 'YOUR_APP_ID'
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error fetching data from Aylien API.");
+                }
+
+                const data = await response.json();
+
+                // Update the page with the result data
+                document.getElementById('polarity').textContent = data.polarity;
+                document.getElementById('polarity_confidence').textContent = data.polarity_confidence;
+                document.getElementById('subjectivity').textContent = data.subjectivity;
+                document.getElementById('subjectivity_confidence').textContent = data.subjectivity_confidence;
+                document.getElementById('excerpt').textContent = data.excerpt;
+
+                // Hide any previous error messages
+                document.getElementById('error-section').style.display = 'none';
+            } catch (error) {
+                document.getElementById('error').textContent = error.message;
+                document.getElementById('error-section').style.display = 'block';
+            }
+        }
+    };
+</script>
+</body>
+</html>

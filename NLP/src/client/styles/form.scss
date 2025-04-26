@@ -1,0 +1,51 @@
+form {
+    border: 1px solid #545454;
+    border-radius: 3px;
+    padding: 40px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+input {
+    padding: 5px 20px;
+    width: 100%;
+    line-height: 16px;
+    margin: 10px 0;
+}
+
+/* Phone */
+@media only screen and (max-width: 715px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+}
+
+/* Tablet */
+@media only screen and (max-width: 990px) {
+    form {
+        width: 70%;
+        padding: 30px;
+    }
+
+    input {
+        font-size: 16px;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 901px) {
+    form {
+        width: 800px;
+        padding: 40px;
+    }
+
+    input {
+        font-size: 18px;
+    }
+}
